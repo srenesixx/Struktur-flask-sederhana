@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Data Mahasiswa{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col bg-pink-50 text-gray-800 font-quicksand">
+
+    <!-- Header -->
+<header class="bg-pink-100 shadow-md py-6 animate-slide-down">
+    <div class="container mx-auto flex flex-col items-center text-center px-4">
+        <h1 class="text-4xl md:text-5xl font-pacifico text-pink-700 mb-4 animate-bounce">
+            🎀 Data Mahasiswa 🎀
+        </h1>
+
+        <nav class="space-x-6 animate-fade-in">
+            <a href="{{ url_for('index') }}" 
+               class="inline-block px-4 py-2 rounded-lg text-pink-700 font-semibold bg-white/70 hover:bg-white hover:text-pink-900 shadow-sm hover:shadow-md transition transform hover:scale-110 hover:-translate-y-0.5">
+               🏠 Home
+            </a>
+            <a href="{{ url_for('add_mahasiswa') }}" 
+               class="inline-block px-4 py-2 rounded-lg text-pink-700 font-semibold bg-white/70 hover:bg-white hover:text-pink-900 shadow-sm hover:shadow-md transition transform hover:scale-110 hover:-translate-y-0.5">
+               🧁 Tambah Data
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* Custom Animations */
+        @keyframes slide-down {
+            0% { transform: translateY(-40px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fade-in {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-slide-down {
+            animation: slide-down 0.9s ease-out forwards;
+        }
+        .animate-fade-in {
+            animation: fade-in 1s ease-in-out forwards;
+        }
+        .font-pacifico { font-family: 'Pacifico', cursive; }
+    </style>
+</header>
+
+
+    <main class="container mx-auto flex-1 px-4 py-6 animate-fade-in">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-pink-100 py-6 text-center text-pink-700 font-semibold animate-pulse">
+        🍬 Dibuat dengan cinta 💖 menggunakan Flask
+    </footer>
+
+    <style>
+        .font-quicksand { font-family: 'Quicksand', sans-serif; }
+        .font-pacifico { font-family: 'Pacifico', cursive; }
+        @keyframes slide-down { 0%{transform:translateY(-50px);opacity:0;}100%{transform:translateY(0);opacity:1;} }
+        @keyframes fade-in { 0%{opacity:0;}100%{opacity:1;} }
+        .animate-slide-down{animation:slide-down .8s ease-out forwards;}
+        .animate-fade-in{animation:fade-in 1s ease-out forwards;}
+    </style>
+</body>
+</html>

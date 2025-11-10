@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Detail Mahasiswa{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto transform transition duration-500 hover:scale-105 hover:shadow-xl">
+    {% if mahasiswa %}
+        <h2 class="text-2xl font-semibold text-pink-700 mb-4">{{ mahasiswa.nama }}</h2>
+        <ul class="space-y-2">
+            <li><strong>NIM:</strong> {{ mahasiswa.nim }}</li>
+            <li><strong>Tahun Masuk:</strong> {{ mahasiswa.tahun_masuk }}</li>
+            <li><strong>Alamat:</strong> {{ mahasiswa.alamat }}</li>
+            <li><strong>Tanggal Lahir:</strong> {{ mahasiswa.tanggal_lahir }}</li>
+        </ul>
+    {% else %}
+        <p class="text-center text-gray-500 italic mt-4">Mahasiswa tidak ditemukan 💔</p>
+    {% endif %}
+</div>
+{% endblock %}
