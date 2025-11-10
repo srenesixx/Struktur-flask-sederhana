@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Mahasiswa Cute 🎀</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-color: #fffafc;
+            font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+        }
+
+        h1, h2 {
+            color: #d63384;
+        }
+
+        /* Animations */
+        @keyframes slide-down {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fade-scale {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-slide-down { animation: slide-down 0.8s ease-out forwards; }
+        .animate-fade-scale { animation: fade-scale 0.8s ease-out forwards; }
+        .animate-pulse-slow { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen items-center">
+
+    <!-- Header -->
+    <header class="w-full bg-pink-200 p-5 shadow-md text-center animate-slide-down">
+        <h1 class="text-3xl font-bold mb-3 animate-bounce">🎀 Data Mahasiswa 🎀</h1>
+        <nav class="space-x-4">
+            <a href="{{ url_for('index') }}" class="inline-block px-4 py-2 rounded-lg text-white bg-pink-500 hover:bg-pink-600 transition transform hover:scale-105">
+                🏠 Home
+            </a>
+            <a href="{{ url_for('add_mahasiswa') }}" class="inline-block px-4 py-2 rounded-lg text-white bg-pink-500 hover:bg-pink-600 transition transform hover:scale-105">
+                🧁 Tambah Data
+            </a>
+        </nav>
+    </header>
+
+    <!-- Konten -->
+    <main class="flex-1 w-full max-w-4xl mt-10 bg-white p-6 rounded-2xl shadow-lg animate-fade-scale">
+        <h2 class="text-2xl font-semibold mb-6">📚 Daftar Mahasiswa</h2>
+
+        {% if mahasiswa_list %}
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-pink-200 rounded-lg">
+                <thead class="bg-pink-100 text-pink-700">
+                    <tr>
+                        <th class="px-4 py-2 border">NIM</th>
+                        <th class="px-4 py-2 border">Nama</th>
+                        <th class="px-4 py-2 border">Tahun Masuk</th>
+                        <th class="px-4 py-2 border">Alamat</th>
+                        <th class="px-4 py-2 border">Tanggal Lahir</th>
+                        <th class="px-4 py-2 border">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mhs in mahasiswa_list %}
+                    <tr class="hover:bg-pink-50 transition transform hover:scale-102">
+                        <td class="px-4 py-2 border">{{ mhs.nim }}</td>
+                        <td class="px-4 py-2 border">{{ mhs.nama }}</td>
+                        <td class="px-4 py-2 border">{{ mhs.tahun_masuk }}</td>
+                        <td class="px-4 py-2 border">{{ mhs.alamat }}</td>
+                        <td class="px-4 py-2 border">{{ mhs.tanggal_lahir }}</td>
+                        <td class="px-4 py-2 border text-center space-x-2">
+                            <a href="{{ url_for('detail_mahasiswa', nim=mhs.nim) }}" 
+                               class="bg-pink-400 text-white px-3 py-1 rounded-lg hover:bg-pink-500 transition transform hover:scale-110">
+                               📋 Detail
+                            </a>
+                            <a href="{{ url_for('delete_mahasiswa', nim=mhs.nim) }}" 
+                               class="bg-red-400 text-white px-3 py-1 rounded-lg hover:bg-red-500 transition transform hover:scale-110"
+                               onclick="return confirm('Hapus data ini?')">
+                               🗑 Hapus
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p class="text-center text-gray-500 italic mt-4">🍥 Belum ada data mahasiswa.</p>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-6 text-center text-pink-500 text-sm animate-pulse-slow">
+        <p>💗 Dibuat dengan cinta menggunakan Flask 💗</p>
+    </footer>
+
+</body>
+</html>
